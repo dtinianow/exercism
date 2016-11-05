@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="HelloWorldTest" tests="3" skipped="2" failures="0" errors="0" timestamp="2016-10-27T19:51:32" hostname="Davids-MacBook-Pro-4.local" time="0.003">
+<testsuite name="HelloWorldTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2016-10-27T19:52:50" hostname="Davids-MacBook-Pro-4.local" time="0.003">
   <properties/>
-  <testcase name="helloNoName" classname="HelloWorldTest" time="0.001"/>
-  <testcase name="helloSampleName" classname="HelloWorldTest" time="0.001">
-    <skipped/>
-  </testcase>
-  <testcase name="helloAnotherSampleName" classname="HelloWorldTest" time="0.0">
-    <skipped/>
-  </testcase>
+  <testcase name="helloNoName" classname="HelloWorldTest" time="0.002"/>
+  <testcase name="helloSampleName" classname="HelloWorldTest" time="0.0"/>
+  <testcase name="helloAnotherSampleName" classname="HelloWorldTest" time="0.0"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
