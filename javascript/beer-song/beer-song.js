@@ -1,41 +1,29 @@
 var BeerSong = function(){};
 
 BeerSong.prototype.verse = function(num) {
-  var currentNum = this.countBeer(num);
-  var newNum = this.recountBeer(num);
-  var firstRefrain = this.bottlesOfBeer(currentNum) + ' on the wall, ';
-  var middleRefrain = this.bottlesOfBeer(currentNum) + this.takeBeerDown(currentNum);
-  var lastRefrain = this.bottlesOfBeer(newNum) + ' on the wall.\n';
-  return currentNum + firstRefrain + this.countBeer(currentNum) + middleRefrain + newNum + lastRefrain;
-};
-
-BeerSong.prototype.bottlesOfBeer = function(num) {
-  var bottle = ' bottle';
-  var beerOnTheWall = ' of beer';
-  if (num === 'No more') { num = num.toLowerCase() };
-  if (num > 1 || num === 'no more' || num === 0) { bottle += 's' }
-  return bottle + beerOnTheWall;
-};
-
-BeerSong.prototype.countBeer = function(num) {
-  var count = num;
-  if (count === 'No more') { count = 'no more' };
-  if (count === 0) { count = 'No more' };
-  return count;
-};
-
-BeerSong.prototype.recountBeer = function(num) {
-  var count = num - 1;
-  if (count === 0) { count = 'no more'};
-  if (count === -1) { count = 99 };
-  return count;
-};
-
-BeerSong.prototype.takeBeerDown = function(num) {
-  var quantity = 'one';
-  if (num === 'No more') { return '.\nGo to the store and buy some more, ' };
-  if (num === 1) { quantity = 'it' };
-  return '.\nTake ' + quantity + ' down and pass it around, ';
+  var firstRefrain = ' bottles of beer on the wall, ';
+  var middleRefrain = ' bottles of beer.\nTake one down and pass it around, ';
+  var lastRefrain = ' bottles of beer on the wall.\n';
+  var oldNumFirst = num;
+  var oldNumLast = num;
+  var newNum = num - 1;
+  if (num === 2) { lastRefrain = ' bottle of beer on the wall.\n'};
+  if (num === 1) {
+    firstRefrain = ' bottle of beer on the wall, ';
+    middleRefrain = ' bottle of beer.\nTake it down and pass it around, ';
+    lastRefrain = ' bottles of beer on the wall.\n';
+    newNum = 'no more';
+  };
+  if (num === 0) {
+    num = 'no more'
+    firstRefrain = ' bottles of beer on the wall, ';
+    middleRefrain = ' bottles of beer.\nGo to the store and buy some more, ';
+    lastRefrain = ' bottles of beer on the wall.\n';
+    oldNumFirst = 'No more';
+    oldNumLast = 'no more';
+    newNum = 99;
+  };
+  return oldNumFirst + firstRefrain + oldNumLast + middleRefrain + newNum + lastRefrain;
 };
 
 BeerSong.prototype.sing = function(a, b) {
@@ -46,6 +34,6 @@ BeerSong.prototype.sing = function(a, b) {
     if (a != b) { song += '\n' }
   }
   return song;
-}
+};
 
 module.exports = BeerSong;
