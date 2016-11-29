@@ -1,26 +1,19 @@
 var School = function() {
-  this.studentsPerGrade = {};
+  this.students = {};
 };
 
 School.prototype.roster = function() {
-  return this.studentsPerGrade;
+  return this.students;
 };
 
 School.prototype.add = function(student, grade) {
-  if (this.studentsPerGrade[grade]) {
-    this.studentsPerGrade[grade].push(student);
-    this.studentsPerGrade[grade].sort();
-  } else {
-    this.studentsPerGrade[grade] = [student]
-  };
+  this.students[grade] = this.students[grade] || [];
+  this.students[grade].push(student);
+  this.students[grade].sort();
 };
 
 School.prototype.grade = function(grade) {
-  if (this.studentsPerGrade[grade]) {
-    return this.studentsPerGrade[grade]
-  } else {
-    return [];
-  };
+  return this.students[grade] || [];
 };
 
 module.exports = School;
