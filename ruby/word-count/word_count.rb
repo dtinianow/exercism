@@ -1,12 +1,7 @@
 class Phrase
-  attr_reader :word_count, :words
 
   def initialize(phrase)
     @words = parse(phrase)
-  end
-
-  def parse(phrase)
-    words = phrase.downcase.scan(/\b[\w']+\b/)
   end
 
   def word_count
@@ -14,6 +9,14 @@ class Phrase
       word_count[word] += 1
       word_count
     end
+  end
+
+private
+
+  attr_reader :words
+
+  def parse(phrase)
+    words = phrase.downcase.scan(/\b[\w']+\b/)
   end
 end
 
