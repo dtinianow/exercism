@@ -6,21 +6,12 @@ class Phrase
   end
 
   def parse(phrase)
-    words = phrase.downcase.gsub(/[.:!&@$%^&]/,'').split(/[\s,]+/)
-    remove_outer_quotes(words)
-  end
-
-  def remove_outer_quotes(words)
-    words.map do |word|
-      word = word [1...-1] if word[0] == "'" && word[-1] == "'"
-      word
-    end
+    words = phrase.downcase.scan(/\b[\w']+\b/)
   end
 
   def word_count
-    words.reduce({}) do |word_count, word|
-      word_count[word] += 1 if word_count[word]
-      word_count[word] = 1 if word_count[word].nil?
+    words.reduce(Hash.new(0)) do |word_count, word|
+      word_count[word] += 1
       word_count
     end
   end
