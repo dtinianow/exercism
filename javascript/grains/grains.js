@@ -5,6 +5,7 @@ var Grains = function() {
 };
 
 Grains.prototype.square = function(num) {
+  if (num < 1 || num > 64) { throw 'InvalidNumber' };
   return bigInt(2).pow(num - 1).toString();
 };
 
@@ -17,3 +18,9 @@ Grains.prototype.total = function() {
 }
 
 module.exports = Grains;
+
+var bigInt = require('./big-integer');
+
+var Grains = function() {
+  this.squares = 64;
+};
