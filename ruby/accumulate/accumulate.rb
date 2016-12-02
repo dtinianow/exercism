@@ -1,11 +1,9 @@
 class Array
   def accumulate
-    array = []
-    self.each do |element|
-      array << yield(element) if element.is_a? String
-      array << element * element if element.is_a? Integer
-    end
-    array
+    results = []
+    raise 'No Block Given Error' unless block_given?
+    each { |i| results << yield(i) }
+    results
   end
 end
 
