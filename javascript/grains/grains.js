@@ -18,9 +18,3 @@ Grains.prototype.total = function() {
 }
 
 module.exports = Grains;
-
-var bigInt = require('./big-integer');
-
-var Grains = function() {
-  this.squares = 64;
-};
