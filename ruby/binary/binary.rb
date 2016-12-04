@@ -1,13 +1,15 @@
 class Binary
+  BINARY_BASE = 2
 
   def initialize(input)
-    @digits = validate(input)
+    validate(input)
+    @digits = reformat(input)
   end
 
   def to_decimal
-    acc = 0
-    parsed_digits.each_with_index { |num, i| acc += num.to_i * (2 ** i) }
-    acc
+    digits.each_with_index.reduce(0) do |acc, (digit, index)|
+      acc += digit.to_i * (BINARY_BASE) ** index
+    end
   end
 
   private
@@ -15,12 +17,12 @@ class Binary
   attr_reader :digits
 
   def validate(input)
-    raise ArgumentError if input =~ /[a-z2-9 ]/i
+    raise ArgumentError if input =~ /[^01]/i
     input
   end
 
-  def parsed_digits
-    digits.split('').reverse
+  def reformat(input)
+    input.split('').reverse
   end
 end
 
