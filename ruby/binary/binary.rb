@@ -8,7 +8,7 @@ class Binary
 
   def to_decimal
     digits.each_with_index.reduce(0) do |acc, (digit, index)|
-      acc += digit.to_i * (BINARY_BASE) ** index
+      acc += digit.to_i * (BINARY_BASE ** index)
     end
   end
 
