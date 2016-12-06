@@ -9,7 +9,6 @@ class ArrayTest < Minitest::Test
     assert_equal [], [].accumulate { |e| e * e }
   end
 
-
   def test_accumulate_squares
     result = [1, 2, 3].accumulate do |number|
       number * number

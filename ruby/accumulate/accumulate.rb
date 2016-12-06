@@ -1,7 +1,7 @@
 class Array
   def accumulate
+    return to_enum(:accumulate) unless block_given?
     results = []
-    raise 'No Block Given Error' unless block_given?
     each { |i| results << yield(i) }
     results
   end
