@@ -1,9 +1,27 @@
-
 class Bob
+  RESPONSE = {
+    yell:     'Whoa, chill out!',
+    question: 'Sure.',
+    silence:  'Fine. Be that way!',
+    default:  'Whatever.'
+  }.freeze
+
   def self.hey(remark)
-    return 'Whoa, chill out!' if remark == remark.upcase && remark != remark.downcase
-    return 'Sure.' if remark.end_with?('?')
-    return 'Fine. Be that way!' if remark.strip == ''
-    'Whatever.'
+    return RESPONSE[:yell]     if yell?(remark)
+    return RESPONSE[:question] if question?(remark)
+    return RESPONSE[:silence]  if silence?(remark)
+    RESPONSE[:default]
+  end
+
+  def self.yell?(remark)
+    remark == remark.upcase && remark != remark.downcase
+  end
+
+  def self.question?(remark)
+    remark.end_with?('?')
+  end
+
+  def self.silence?(remark)
+    remark.strip == ''
   end
 end
