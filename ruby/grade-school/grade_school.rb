@@ -1,23 +1,23 @@
 class School
-  attr_reader :enrollment
-
   def initialize
     @enrollment = Hash.new { |h, k| h[k] = [] }
   end
 
   def students(grade)
-    enrollment[grade].sort
+    enrollment[grade]
   end
 
   def add(name, grade)
-    enrollment[grade] << name
+    enrollment[grade].push(name).sort!
   end
 
   def students_by_grade
-    enrollment.sort.map do |grade, students|
-      { grade: grade, students: students.sort }
-    end
+    enrollment.keys.sort.map { |i| { grade: i, students: enrollment[i] } }
   end
+
+  private
+
+  attr_reader :enrollment
 end
 
 module BookKeeping
