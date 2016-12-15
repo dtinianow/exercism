@@ -4,13 +4,14 @@ import java.util.HashMap;
 
 public class Etl {
   public Map<String, Integer> transform(Map<Integer, List<String>> old) {
-    Map<String, Integer> newScores = new HashMap<String, Integer>();
-    for (Map.Entry<Integer, List<String>> entry : old.entrySet()) {
-      for (String oldLetter : entry.getValue()) {
-        String newLetter = oldLetter.toLowerCase();
-        newScores.put(newLetter, entry.getKey());
-      }
-    }
-    return newScores;
+
+    Map<String, Integer> newScoreMapping = new HashMap<String, Integer>();
+
+    old.forEach((score,letters) ->
+        letters.forEach(letter ->
+            newScoreMapping.put(letter.toLowerCase(), score))
+    );
+
+    return newScoreMapping;
   }
 }
