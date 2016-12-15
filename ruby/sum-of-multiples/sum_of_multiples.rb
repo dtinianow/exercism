@@ -4,7 +4,7 @@ class SumOfMultiples
   end
 
   def to(limit)
-    (2...limit).reduce(0) do |sum, num|
+    (1...limit).reduce(0) do |sum, num|
       sum += num if multiples.any? { |multiple| is_multiple?(num, multiple) }
       sum
     end
