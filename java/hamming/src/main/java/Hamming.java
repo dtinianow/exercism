@@ -4,14 +4,12 @@ public class Hamming {
             throw new IllegalArgumentException("Strands must be equal length");
         }
 
-        char[] splitStrandA = strandA.toCharArray();
-        char[] splitStrandB = strandB.toCharArray();
-        int total = 0;
+        int totalDifferences = 0;
 
-        for (int i = 0; i < splitStrandA.length; i++) {
-          if (splitStrandA[i] != splitStrandB[i]) { total += 1; }
+        for (int i = 0; i < strandA.length(); i++) {
+          if (strandA.charAt(i) != strandB.charAt(i)) { totalDifferences += 1; }
         }
 
-        return total;
+        return totalDifferences;
     }
 }
