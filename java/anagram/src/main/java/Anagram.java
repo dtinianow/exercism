@@ -13,9 +13,7 @@ public class Anagram {
     public List<String> match(List<String> words) {
         List<String> anagrams = new ArrayList<>();
         for (String word : words) {
-            if (!input.equals(word.toLowerCase()) && sortLetters(input).equals(sortLetters(word))) {
-               anagrams.add(word);
-            }
+            if (isAnagram(word) && !isIdenticalToInput(word))  { anagrams.add(word); }
         }
         return anagrams;
     }
@@ -24,5 +22,13 @@ public class Anagram {
         char[] letters = word.toLowerCase().toCharArray();
         Arrays.sort(letters);
         return String.copyValueOf(letters);
+    }
+
+    private boolean isAnagram(String word) {
+        return sortLetters(input).equals(sortLetters(word));
+    }
+
+    private boolean isIdenticalToInput(String word) {
+        return input.equals(word.toLowerCase());
     }
 }
