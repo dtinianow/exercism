@@ -20,15 +20,12 @@ function toRoman(n, romanNumeral = '') {
   while (n > 0) {
     if (ROMAN_NUMERALS[n]) {
       romanNumeral += ROMAN_NUMERALS[n];
-      n -= n;
+      return toRoman(leftOver, romanNumeral);
     } else {
       leftOver += 1;
       n -= 1;
     }
   }
-
-  if (leftOver > 0) { return toRoman(leftOver, romanNumeral); }
-
   return romanNumeral;
 };
 
