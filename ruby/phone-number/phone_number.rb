@@ -36,7 +36,7 @@ class PhoneNumber
     !(input =~ /[a-zA-Z]/).nil?
   end
 
-  def replace_non_numbers(number)
+  def replace_non_numbers(input)
     input.gsub(/\D/, '')
   end
 end
