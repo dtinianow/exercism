@@ -1,41 +1,28 @@
 class BeerSong
-  def verse(num)
-    first(num) + middle(num) + last(num - 1)
+  def verse(n)
+    case n
+    when 0
+      "No more bottles of beer on the wall, no more bottles of beer.\n" \
+      "Go to the store and buy some more, 99 bottles of beer on the wall.\n"
+    when 1
+      "1 bottle of beer on the wall, 1 bottle of beer.\n" \
+      "Take it down and pass it around, no more bottles of beer on the wall.\n"
+    else
+      "#{n} bottles of beer on the wall, #{n} bottles of beer.\n" \
+      "Take one down and pass it around, " \
+      "#{n - 1} bottle#{n > 2 ? 's' : ''} of beer on the wall.\n"
+    end
   end
 
-  def verses(current, stop)
-    song = ''
-    while current > stop
-      song += verse(current) + "\n"
-      current -= 1
-    end
-    song += verse(current)
+  def verses(current, last)
+    current
+      .downto(last)
+      .map { |num| verse(num) }
+      .join("\n")
   end
 
   def lyrics
     verses(99, 0)
-  end
-
-  def first(num)
-    bottles = 'bottles'
-    bottles = 'bottle' if num == 1
-    num = 'no more' if num == 0
-    "#{num.to_s.capitalize} #{bottles} of beer on the wall, #{num} #{bottles} of beer.\n"
-  end
-
-  def middle(num)
-    return 'Go to the store and buy some more, ' if num == 0
-    quantity = 'one'
-    quantity = 'it' if num == 1
-    "Take #{quantity} down and pass it around, "
-  end
-
-  def last(num)
-    bottles = 'bottles'
-    bottles = 'bottle' if num == 1
-    num = 'no more' if num == 0
-    num = 99 if num == -1
-    "#{num} #{bottles} of beer on the wall.\n"
   end
 end
 
