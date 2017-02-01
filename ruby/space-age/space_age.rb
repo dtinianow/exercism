@@ -1,6 +1,7 @@
 class SpaceAge
   EARTH_YEAR_IN_SECONDS = 31557600
-  ORBITAL_PERIOD = {
+  ORBITAL_PERIOD_RATIO = {
+    earth: 1.0,
     mercury: 0.2408467,
     venus: 0.61519726,
     mars: 1.8808158,
@@ -16,35 +17,13 @@ class SpaceAge
     @seconds = seconds
   end
 
-  def on_earth
-    seconds.to_f / EARTH_YEAR_IN_SECONDS
+  ORBITAL_PERIOD_RATIO.keys.each do |planet|
+    define_method "on_#{planet}" do
+      send(:on, planet)
+    end
   end
 
-  def on_mercury
-    on_earth / ORBITAL_PERIOD[:mercury]
-  end
-
-  def on_venus
-    on_earth / ORBITAL_PERIOD[:venus]
-  end
-
-  def on_mars
-    on_earth / ORBITAL_PERIOD[:mars]
-  end
-
-  def on_jupiter
-    on_earth / ORBITAL_PERIOD[:jupiter]
-  end
-
-  def on_saturn
-    on_earth / ORBITAL_PERIOD[:saturn]
-  end
-
-  def on_uranus
-    on_earth / ORBITAL_PERIOD[:uranus]
-  end
-
-  def on_neptune
-    on_earth / ORBITAL_PERIOD[:neptune]
+  def on(planet)
+    seconds.to_f / EARTH_YEAR_IN_SECONDS / ORBITAL_PERIOD_RATIO[planet]
   end
 end
