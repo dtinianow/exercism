@@ -1,12 +1,12 @@
 class Nucleotide
   def self.from_dna(strand)
-    Nucleotide.new(strand)
+    new(strand)
   end
 
   attr_reader :histogram
 
   def count(nucleotide)
-    strand.chars.count { |char| char == nucleotide }
+    strand.count(nucleotide)
   end
 
   private
@@ -25,8 +25,6 @@ class Nucleotide
 
   def build_histogram
     histogram = { 'A' => 0, 'T' => 0, 'C' => 0, 'G' => 0 }
-    strand.chars.each_with_object(histogram) do |nucleotide, histogram|
-      histogram[nucleotide] += 1
-    end
+    strand.chars.each_with_object(histogram) { |char, obj| obj[char] += 1 }
   end
 end
