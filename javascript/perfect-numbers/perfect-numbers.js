@@ -1,7 +1,7 @@
 class PerfectNumbers {
   classify(num) {
     if (num <= 0) return 'Classification is only possible for natural numbers.'
-    const aliquot_sum = this.getFactors(num).reduce((a, b) => a + b, 0);
+    const aliquot_sum = this.getAliquotSum(num, this.determineIncrement(num));
     return this.determineType(aliquot_sum, num);
   }
 
@@ -11,10 +11,15 @@ class PerfectNumbers {
     if (aliquot_sum < num) return 'deficient';
   }
 
-  getFactors(num) {
-    let factors = [];
-    for (let i = 1; i < num; i++) { if (num % i === 0) factors.push(i); }
-    return factors;
+  getAliquotSum(num, n) {
+    const half = Math.floor(num / 2);
+    let aliquot_sum = 0;
+    for (let i = 1; i <= half; i += n) { if (num % i === 0) aliquot_sum += i };
+    return aliquot_sum;
+  }
+
+  determineIncrement(num) {
+    return num % 2 === 0 ? 1 : 2;
   }
 }
 
