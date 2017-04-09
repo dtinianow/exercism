@@ -7,9 +7,12 @@ class Game
   end
 
   def roll(pins)
-    raise BowlingError if pins < 0
-    raise BowlingError if pins > 10
-    raise BowlingError if !frames.last.strike? && frames.last.rolls.reduce(0, :+) > 10
+    raise BowlingError if pins < 0 || pins > 10
+    raise BowlingError if !frames.last.strike? && frames.length != 10 && frames.last.rolls.reduce(0, :+) > 10
+    if frames.length == 10 && frames.last.strike? && frames.last.rolls.length == 2 && frames.last.rolls[1] < 10
+      raise BowlingError if pins >= 10
+      raise BowlingError if frames.last.rolls[1] < 10 && frames.last.rolls[1] + pins > 10
+    end
 
     if frames.length > 1 && frames[-2].strike? && frames[-2].bonus < 20
       frames[-2].add_bonus(pins)
@@ -24,6 +27,9 @@ class Game
   end
 
   def score
+    if frames.length == 10 && (frames.last.strike? || frames.last.spare?)
+      raise BowlingError if frames.last.rolls.length < 3
+    end
     raise BowlingError if frames.length != 10
     frames.reduce(0) { |sum, frame| sum + frame.points }
   end
@@ -69,4 +75,8 @@ class Frame
 end
 
 class BowlingError < StandardError
+end
+
+module BookKeeping
+  VERSION = 3
 end
