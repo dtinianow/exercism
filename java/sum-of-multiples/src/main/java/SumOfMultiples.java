@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.stream.IntStream;
 
 public final class SumOfMultiples {
@@ -13,16 +14,13 @@ public final class SumOfMultiples {
     public int getSum() {
         return IntStream
                 .range(1, maxValue)
-                .filter(n -> isMultiple(n))
+                .filter(this::isMultiple)
                 .sum();
     }
 
     private Boolean isMultiple(int value) {
-        for (int multiple : multiples) {
-            if (value % multiple == 0) {
-                return true;
-            }
-        }
-        return false;
+        return Arrays
+                .stream(multiples)
+                .anyMatch(multiple -> value % multiple == 0);
     }
 }
