@@ -1,54 +1,49 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 public final class Matrix {
 
-    private final String matrix;
-    private List<List<Integer>> matrixAsList = new ArrayList<>();
+    private int[][] matrix;
+    private int columnCount = 0;
+    private int rowCount = 0;
 
     public Matrix(String matrix) {
-        this.matrix = matrix;
-        this.matrixAsList = matrixAsList();
+        this.matrix = matrixAsList(matrix);
     }
 
     public int getRowsCount() {
-        return matrixAsList.size();
+        return rowCount;
     }
 
     public int getColumnsCount() {
-        return matrixAsList.get(0).size();
+        return columnCount;
     }
 
     public int[] getRow(int index) {
-        return matrixAsList.get(index).stream().mapToInt(i -> i).toArray();
+        return matrix[index];
     }
 
     public int[] getColumn(int index) {
-        int rowsCount = getRowsCount();
-        int[] column = new int[rowsCount];
+        int[] column = new int[rowCount];
 
-        for (int i = 0; i < rowsCount; i++) {
-            column[i] = matrixAsList.get(i).get(index);
+        for (int i = 0; i < rowCount; i++) {
+            column[i] = matrix[i][index];
         }
 
         return column;
     }
 
-    private List<List<Integer>> matrixAsList() {
-        List<List<Integer>> matrixAsList = new ArrayList<>();
-        List<String> rows = Arrays.asList(matrix.split("\\n"));
-        int height = rows.size();
-        int width = rows.get(0).split(" ").length;
+    private int[][] matrixAsList(String matrix) {
+        String[] rows = matrix.split("\\n");
+        rowCount = rows.length;
+        columnCount = rows[0].split(" ").length;
+        int[][] matrixAsList = new int[rowCount][columnCount];
 
-        for (int i = 0; i < height; i++) {
-            List<Integer> placeholder = new ArrayList<>();
-            List<String> rowDigits = Arrays.asList(rows.get(i).split(" "));
+        for (int i = 0; i < rowCount; i++) {
+            int[] temp = new int[columnCount];
+            String[] rowDigits = rows[i].split(" ");
 
-            for (int j = 0; j < width; j++) {
-                placeholder.add(j, Integer.valueOf(rowDigits.get(j)));
+            for (int j = 0; j < columnCount; j++) {
+                temp[j] = Integer.valueOf(rowDigits[j]);
             }
-            matrixAsList.add(i, placeholder);
+            matrixAsList[i] = temp;
         }
 
         return matrixAsList;
