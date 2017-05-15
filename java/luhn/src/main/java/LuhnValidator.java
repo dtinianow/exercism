@@ -1,7 +1,7 @@
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public final class LuhnValidator {
 
@@ -15,19 +15,22 @@ public final class LuhnValidator {
         return isValidLuhn(cleanedInput);
     }
 
+    private Boolean isValidLuhn(String input) {
+        return applyLuhn(input) % 10 == 0;
+    }
+
     private String removeWhitespace(String input) {
         return input.replaceAll("[\\s]", "");
     }
 
-    private Boolean isValidLuhn(String input) {
-        List<Integer> digits = applyDoublingRule(formatDigits(input));
-
-        return digits.stream().mapToInt(Integer::intValue).sum() % 10 == 0;
+    private int applyLuhn(String input) {
+        return applyDoublingRule(formatDigits(input)).stream()
+                .mapToInt(Integer::intValue)
+                .sum();
     }
 
     private List<Integer> formatDigits(String digits) {
-        return Arrays.asList(digits.split(""))
-                .stream()
+        return Stream.of(digits.split(""))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }

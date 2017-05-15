@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="LuhnValidatorTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2017-05-15T04:48:00" hostname="Davids-MacBook-Pro-4.local" time="0.031">
+<testsuite name="LuhnValidatorTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2017-05-15T05:00:57" hostname="Davids-MacBook-Pro-4.local" time="0.018">
   <properties/>
-  <testcase name="testThatDoublingNineIsHandledCorrectly" classname="LuhnValidatorTest" time="0.021"/>
-  <testcase name="testThatASimpleValidNumberIsIdentifiedAsValid" classname="LuhnValidatorTest" time="0.001"/>
+  <testcase name="testThatDoublingNineIsHandledCorrectly" classname="LuhnValidatorTest" time="0.012"/>
+  <testcase name="testThatASimpleValidNumberIsIdentifiedAsValid" classname="LuhnValidatorTest" time="0.0"/>
   <testcase name="testThatAddingANonDigitCharacterToAValidStringInvalidatesTheString" classname="LuhnValidatorTest" time="0.0"/>
-  <testcase name="testThatTheStringConsistingOfASingleZeroIsInvalid" classname="LuhnValidatorTest" time="0.0"/>
-  <testcase name="testThatSingleDigitStringIsNotValid" classname="LuhnValidatorTest" time="0.001"/>
-  <testcase name="testThatAnInvalidCreditCardIsIdentifiedAsInvalid" classname="LuhnValidatorTest" time="0.001"/>
+  <testcase name="testThatTheStringConsistingOfASingleZeroIsInvalid" classname="LuhnValidatorTest" time="0.001"/>
+  <testcase name="testThatSingleDigitStringIsNotValid" classname="LuhnValidatorTest" time="0.0"/>
+  <testcase name="testThatAnInvalidCreditCardIsIdentifiedAsInvalid" classname="LuhnValidatorTest" time="0.0"/>
   <testcase name="testThatTheStringConsistingOfASpaceAndASingleZeroIsInvalid" classname="LuhnValidatorTest" time="0.0"/>
   <testcase name="testThatStringContainingSymbolsIsInvalid" classname="LuhnValidatorTest" time="0.0"/>
-  <testcase name="testThatAnInvalidCanadianSocialInsuranceNumberIsIdentifiedAsInvalid" classname="LuhnValidatorTest" time="0.001"/>
+  <testcase name="testThatAnInvalidCanadianSocialInsuranceNumberIsIdentifiedAsInvalid" classname="LuhnValidatorTest" time="0.0"/>
   <testcase name="testThatStringContainingMultipleZerosIsValid" classname="LuhnValidatorTest" time="0.0"/>
   <testcase name="testThatStringContainingPunctuationIsInvalid" classname="LuhnValidatorTest" time="0.0"/>
   <testcase name="testThatAValidCanadianSocialInsuranceNumberIsIdentifiedAsValidV1" classname="LuhnValidatorTest" time="0.001"/>
