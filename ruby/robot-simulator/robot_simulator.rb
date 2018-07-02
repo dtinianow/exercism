@@ -1,42 +1,19 @@
 class Robot
+    DIRECTIONS = { north: [0,1], east: [1,0], south: [0,-1], west: [-1,0] }
+
     attr_reader :bearing, :x, :y
-    
-    def directions
-        {   
-            north: 
-            {
-                left:  :west,
-                right: :east
-            },
-            east:
-            {
-                left:  :north,
-                right: :south
-            },
-            west: 
-            {
-                left:  :south,
-                right: :north
-            },
-            south:
-            {
-                left:  :east,
-                right: :west
-            }
-        }
-    end
 
     def orient(direction)
-        raise ArgumentError unless directions.keys.include? direction
+        raise ArgumentError unless DIRECTIONS.keys.include? direction
         @bearing = direction
     end
 
     def turn_right
-        orient(directions[bearing][:right])
+        orient(DIRECTIONS.keys[((DIRECTIONS.keys.index(bearing) + 1) % 4)])
     end
 
     def turn_left
-        orient(directions[bearing][:left])
+        orient(DIRECTIONS.keys[((DIRECTIONS.keys.index(bearing) - 1) % 4)])
     end
 
     def at(x, y)
@@ -49,36 +26,24 @@ class Robot
     end
 
     def advance
-        if bearing == :north
-            @y += 1
-        elsif bearing == :south
-            @y -= 1
-        elsif bearing == :east
-            @x += 1
-        elsif bearing == :west
-            @x -= 1
-        end
+        @x += DIRECTIONS[bearing].first
+        @y += DIRECTIONS[bearing].last
     end
 end
 
 class Simulator
-    INSTRUCTIONS = 
-    {
-        'L' => :turn_left,
-        'R' => :turn_right,
-        'A' => :advance
-    }
+    INSTRUCTIONS = { 'L' => :turn_left, 'R' => :turn_right, 'A' => :advance }
 
-    def instructions(input)
-        input.split("").map { |n| INSTRUCTIONS[n] }
+    def instructions(steps)
+        steps.each_char.map { |c| INSTRUCTIONS[c] }
     end
 
-    def place(robot, data)
-        robot.at(data[:x], data[:y])
-        robot.orient(data[:direction])
+    def place(robot, x:, y:, direction:)
+        robot.at(x, y)
+        robot.orient(direction)
     end
 
-    def evaluate(robot, input)
-        instructions(input).each { |instruction| robot.send(instruction) }
+    def evaluate(robot, steps)
+        instructions(steps).each { |step| robot.send(step) }
     end
 end
