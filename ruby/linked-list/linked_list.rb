@@ -15,29 +15,29 @@ class Deque
     end
 
     def pop
-        value = last.value
+        result = last
 
-        if first != last
-            last.previous.next = nil
+        if last
             @last = last.previous
-        else
-            @first = @last = nil
+            last.next = nil if last
         end
+
+        @first = nil if first == result
         
-        value
+        result.value
     end
 
     def shift
-        value = first.value
+        result = first
 
-        if first != last
-            first.next.previous = nil
+        if first
             @first = first.next
-        else
-            @first = @last = nil
+            first.previous = nil if first
         end
 
-        value
+        @last = nil if last == result
+
+        result.value
     end
 
     def unshift(value)
