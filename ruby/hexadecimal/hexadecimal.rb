@@ -1,24 +1,6 @@
 require 'pry'
 class Hexadecimal
-    CONVERSION = 
-    {
-        '0' => 0, 
-        '1' => 1, 
-        '2' => 2, 
-        '3' => 3, 
-        '4' => 4,
-        '5' => 5,
-        '6' => 6,
-        '7' => 7,
-        '8' => 8,
-        '9' => 9,
-        'a' => 10,
-        'b' => 11,
-        'c' => 12,
-        'd' => 13,
-        'e' => 14,
-        'f' => 15
-    }
+    HEX_LETTERS = Hash[('a'..'f').zip(10..15)].freeze
 
     attr_reader :input
 
@@ -27,9 +9,13 @@ class Hexadecimal
     end
 
     def to_decimal
-        input.reverse.chars.each_with_index.inject(0) do |sum, (char, index)|
-            return 0 unless CONVERSION[char]
-            sum += CONVERSION[char] * (16 ** index)
+        return 0 if input.match(/[^a-f\d]/) 
+        
+        input.reverse
+            .chars
+            .each_with_index
+            .inject(0) do |sum, (char, index)|
+                sum += (HEX_LETTERS[char] || char.to_i) * (16 ** index)
         end
     end
 end
