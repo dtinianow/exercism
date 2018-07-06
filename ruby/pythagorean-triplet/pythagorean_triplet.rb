@@ -1,17 +1,9 @@
 class Triplet
     
-    def self.where(max_factor:, min_factor: 1, sum: nil)   
-        triplets = []
-        (min_factor).upto(max_factor - 2) do |i|
-            (i + 1).upto(max_factor) do |j|
-                (j + 1).upto(max_factor) do |k|
-                    triplet = new(i, j, k)
-                    next if sum && sum != triplet.sum
-                    triplets << triplet if triplet.pythagorean?
-                end
-            end
-        end
-        triplets
+    def self.where(max_factor:, min_factor: 1, sum: nil)
+        x = [*min_factor..max_factor].combination(3)
+            .map { |factors| new(*factors) }
+            .select { |triplet| triplet.pythagorean? && (sum.nil? || triplet.sum == sum) }
     end
 
     attr_reader :a, :b, :c
