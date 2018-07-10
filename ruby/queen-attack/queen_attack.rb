@@ -1,35 +1,40 @@
 class Queens
-    attr_reader :white, :black
+  def initialize(positions)
+    @white = Position.new(positions[:white]) if positions[:white]
+    @black = Position.new(positions[:black]) if positions[:black]
+  end
 
-    def initialize(white: nil, black: nil)
-        @white = validate_position(white) if white
-        @black = validate_position(black) if black
-    end
+  def attack?
+    in_same_row? || in_same_column? || in_same_diagonal?
+  end
 
-    def validate_position(position)
-        raise ArgumentError if position.any? { |p| p < 0 || p > 7 }
-        position
-    end
+  private
 
-    def attack?
-        in_same_row? || in_same_column? || in_same_diagonal?
-    end
+  attr_reader :white, :black
 
-    private
-    
-    def in_same_row?
-        white.first == black.first
-    end
+  def in_same_row?
+    white.row == black.row
+  end
 
-    def in_same_column?
-        white.last == black.last
-    end
+  def in_same_column?
+    white.column == black.column
+  end
 
-    def in_same_diagonal?
-        (white.first - black.first).abs == (white.last - black.last).abs
-    end
+  def in_same_diagonal?
+    (white.row - black.row).abs == (white.column - black.column).abs
+  end
+end
+
+class Position
+  attr_reader :row, :column
+
+  def initialize(coordinates)
+    raise ArgumentError if coordinates.any? { |x| x < 0 || x > 7 }
+    @row = coordinates.first
+    @column = coordinates.last
+  end
 end
 
 module BookKeeping
-    VERSION = 2
+  VERSION = 2
 end
